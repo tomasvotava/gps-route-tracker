@@ -1,0 +1,33 @@
+name: Deploy to pages.dev
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      CLOUDFLARE_API_TOKEN: "${{secrets.CLOUDFLARE_API_TOKEN}}"
+      CLOUDFLARE_ACCOUNT_ID: 3597a2851672d51f459dfb152095cb13
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Deploy to Pages.dev using Wrangler to branch "${{github.ref_name}}"
+        run: |
+          npx -y wrangler pages deploy \
+            --project-name gps-route-tracker \
+            --branch "${{github.ref_name == 'master' && 'main' || github.ref_name}}" \
+            .

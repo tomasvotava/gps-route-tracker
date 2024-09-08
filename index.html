@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="A simple PWA to track your GPS route and calculate the total distance."
+    />
+    <title>GPS Route Tracker</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#28a745" />
+    <meta name="apple-mobile-web-app-title" content="GPS Route Tracker" />
+    <meta name="application-name" content="GPS Route Tracker" />
+    <meta name="msapplication-TileColor" content="#e0e0e0" />
+    <meta name="theme-color" content="#e0e0e0" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>GPS Tracker</h1>
+      <button id="toggleTracking" onclick="toggleTracking()">
+        Start Tracking
+      </button>
+      <div id="status">Not tracking</div>
+
+      <div id="map"></div>
+
+      <div id="routeDescription"></div>
+      <!-- <ul id="locationList"></ul> -->
+    </div>
+    <nav class="nav">
+      <span class="toggle">
+        <label for="menu-toggle">
+          <input
+            type="checkbox"
+            onchange="updatePreviousRoutesList()"
+            name="menu-toggle"
+            id="menu-toggle"
+          />
+          <span>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g
+                id="SVGRepo_tracerCarrier"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M4 18L20 18"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M4 12L20 12"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+                <path
+                  d="M4 6L20 6"
+                  stroke="#000000"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                ></path>
+              </g>
+            </svg>
+          </span>
+        </label>
+      </span>
+      <h2>Previous routes</h2>
+      <div id="routesStats"></div>
+      <div id="previousRoutes"></div>
+    </nav>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

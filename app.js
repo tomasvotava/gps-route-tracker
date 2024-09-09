@@ -149,6 +149,8 @@ class Route {
    * @returns {String}
    */
   toHtml() {
+    let coordinates = this.coordinates.slice(-10, -1).reverse();
+    let ellipsis = this.coordinates.length > 9 ? "<li>...</li>" : "";
     return `
     <h2>${this.created.toLocaleString()}</h2>
     <p><strong>Distance: </strong>${humanize(this.getLength())}&nbsp;km</p>
@@ -157,7 +159,7 @@ class Route {
       this.getAvgSpeed()
     )}&nbsp;km/h</p>
     <ul id="locationList">
-        ${this.coordinates
+        ${coordinates
           .map(
             (coord) =>
               `<li>[${coord.timestamp.toLocaleString()}] Lat: ${
@@ -165,6 +167,7 @@ class Route {
               }, Lon: ${coord.lon}</li>`
           )
           .join("")}
+          ${ellipsis}
     </ul>
     `;
   }
@@ -369,7 +372,7 @@ async function updatePreviousRoutesList() {
   const routesStats = document.getElementById("routesStats");
   const previousRoutes = document.getElementById("previousRoutes");
   const routeDb = new RouteDatabase();
-  const routes = await routeDb.listRoutes();
+  const routes = (await routeDb.listRoutes()).reverse();
   const stats = routes.reduce(
     (prev, current) => {
       prev.avgSpeedCount += 1;

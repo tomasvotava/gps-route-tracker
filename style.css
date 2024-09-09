@@ -5,7 +5,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   margin: 0;
   background-color: #f0f0f0;
 }
@@ -17,6 +16,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 70%;
+  margin-top: 20px;
 }
 
 button {
@@ -54,6 +54,7 @@ li {
 }
 #map {
   height: 600px;
+  max-height: 50vh;
   width: 100%;
 }
 
@@ -70,6 +71,8 @@ nav.nav {
   position: fixed;
   min-height: 100vh;
   z-index: 1000;
+  max-height: 100vh;
+  overflow-y: hidden;
 }
 
 span.toggle {
@@ -94,6 +97,7 @@ span.toggle {
 
 nav.nav:has(#menu-toggle:checked) {
   transform: translateX(0);
+  overflow-y: scroll;
 }
 
 #previousRoutes h3 {
